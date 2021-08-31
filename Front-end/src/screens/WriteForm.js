@@ -78,7 +78,9 @@ class WriteForm extends React.Component {
         }
       )
       .then((response) => {
-        this.history.push(`/post/${this.state.wharboard}/${response.data}`);
+        this.history.push(
+          `/post/${this.state.wharboard}/${response.data.data}`
+        );
         console.log(this.history);
       })
       .catch((error) => {

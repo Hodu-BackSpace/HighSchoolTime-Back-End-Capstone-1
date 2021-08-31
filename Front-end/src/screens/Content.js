@@ -128,10 +128,10 @@ class Content extends React.Component {
     axios
       .get(SERVER_URL + "/api/v1/board/" + params.boardlist + "/" + params.num)
       .then(({ data }) => {
-        console.log(data);
+        console.log(data.data);
         this.setState({
-          boards: data,
-          comment: data.commentList,
+          boards: data.data,
+          comment: data.data.comments,
           // picture: data.uploadFileDTOList,
         });
       })

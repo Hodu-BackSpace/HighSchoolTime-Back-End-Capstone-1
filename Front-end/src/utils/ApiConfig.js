@@ -104,7 +104,7 @@ export const GetArticle = async (props) => {
       },
     })
     .then((res) => {
-      setarticle(res.data);
+      setarticle(res.data.data);
       console.log(res.data);
     })
     .catch((err) => {
@@ -116,14 +116,14 @@ export const GetArticle = async (props) => {
 export const GetUserInfo = async (props) => {
   const { setloading } = props;
   await axios
-    .get(SERVER_URL + "/api/v1/users", {
+    .get(SERVER_URL + "/api/v1/members", {
       headers: {
         Authorization: tokenData(),
       },
     })
     .then((res) => {
       console.log(res);
-      udata(res.data);
+      udata(res.data.data);
       setloading(true);
     })
     .catch((err) => {
@@ -133,12 +133,12 @@ export const GetUserInfo = async (props) => {
 };
 
 export const PutUserInfo = (props) => {
-  const { nickname, password, seterror } = props;
+  const { nickName, password, seterror } = props;
 
   axios
-    .put(SERVER_URL + "/api/v1/users", {
-      nickname: nickname,
-      password: password,
+    .patch(SERVER_URL + "/api/v1/members", {
+      nickName: nickName,
+      passWord: password,
     })
     .then((res) => {
       console.log(res);

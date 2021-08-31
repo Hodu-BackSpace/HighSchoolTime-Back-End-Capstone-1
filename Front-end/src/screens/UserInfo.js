@@ -36,9 +36,6 @@ function UserInfo(props) {
 
   const target = useRef(null);
 
-  const onChangePrevPassword = (e) => {
-    setPrevPassword(e.target.value);
-  };
   const onChangeNewPassword = (e) => {
     setNewPassword(e.target.value);
   };
@@ -49,10 +46,8 @@ function UserInfo(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(newNickname);
-    console.log(newPassword);
     PutUserInfo({
-      nickname: newNickname,
+      nickName: newNickname,
       password: newPassword,
       seterror: seterror,
     });
@@ -68,21 +63,13 @@ function UserInfo(props) {
           </Form.Group>
           <Form.Group as={Col}>
             <UserInfoFormLable>이름</UserInfoFormLable>
-            <p>{udata() && udata().username}</p>
+            <p>{udata() && udata().name}</p>
           </Form.Group>
           <Form.Group as={Col}>
             <UserInfoFormLable>현재 닉네임</UserInfoFormLable>
             <Form.Control
-              placeholder={`현재 닉네임 : ${udata() && udata().nickname}`}
+              placeholder={`현재 닉네임 : ${udata() && udata().nickName}`}
               onChange={onChangeNewNickname}
-            />
-          </Form.Group>
-          <Form.Group as={Col} controlId="formGridPassword">
-            <UserInfoFormLable>현재 비밀번호</UserInfoFormLable>
-            <Form.Control
-              type="password"
-              placeholder="현재 비밀번호"
-              onChange={onChangePrevPassword}
             />
           </Form.Group>
 
@@ -102,7 +89,7 @@ function UserInfo(props) {
             >
               학교
             </UserInfoFormLable>
-            <p>{udata().schoolname}</p>
+            <p>{udata().highSchoolName}</p>
           </Form.Group>
           <Form.Group as={Col}>
             <UserInfoFormLable
@@ -120,7 +107,7 @@ function UserInfo(props) {
             >
               반
             </UserInfoFormLable>
-            <p>{udata().classnum}</p>
+            <p>{udata().classNum}</p>
           </Form.Group>
 
           <Button

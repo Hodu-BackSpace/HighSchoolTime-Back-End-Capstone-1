@@ -143,9 +143,9 @@ class FreeBoard extends React.Component {
     axios
       .get(SERVER_URL + "/api/v1/board/freeBoard?page=" + this.state.page_count)
       .then(({ data }) => {
-        console.log(data);
+        console.log(data.data);
         this.setState({
-          boards: data,
+          boards: data.data,
         });
         console.log(this.state.boards);
       })
@@ -218,7 +218,9 @@ class FreeBoard extends React.Component {
                 </BoardHeader>
                 <BoardBody>{board.content}</BoardBody>
                 <BoardFooter>
-                  <span id="content_like" style={{ fontSize: "20px" }}></span>
+                  <span id="content_like" style={{ fontSize: "20px" }}>
+                    ♥ {board.likeCount}
+                  </span>
                   <button
                     onClick={() => {
                       this.DeleteBoard({ id: board.id });
@@ -227,12 +229,14 @@ class FreeBoard extends React.Component {
                       border: "none",
                       backgroundColor: "white",
                     }}
-                  ></button>
+                  >
+                    {/* 💬 {board.commentDTOList.length} */}
+                  </button>
                 </BoardFooter>
               </BoardItem>
             ))}
           </BoardList>
-          <Link to="/post/freeboard/writeform">
+          <Link to="/post/freeBoard/writeform">
             <LinkButton>글쓰기</LinkButton>
           </Link>
           <Pagenation>

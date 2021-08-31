@@ -42,14 +42,17 @@ function Login(props) {
       .post(SERVER_URL + "/api/v1/auth/login", data)
       .then((res) => {
         console.log(res);
-        if (res.data === "failed") {
+        if (res.status === 400 || res.status === 500) {
+          console.log("here");
           setLoginError(true);
         } else {
-          // localStorage.setItem("TOKEN", "Bearer " + `${res.data}`);
+          localStorage.setItem(
+            "TOKEN",
+            `${res.data.data.grantType} ` + `${res.data.data.accessToken}`
+          );
+          console.log(localStorage.getItem("TOKEN"));
           setLoginError(false);
-          // tokenData(localStorage.getItem("TOKEN"));
-          setCookie("JSESSIONID", res.headers["set-cookie"], addPath("/*"));
-          console.log(cookies.get("JSESSIONID"));
+          tokenData(localStorage.getItem("TOKEN"));
           logged(true);
           props.history.push("/");
         }

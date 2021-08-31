@@ -93,9 +93,9 @@ const ControlledTabs = (props) => {
 
             <NavItem>
               <NavLink
-                eventKey="freeboard"
-                active={show === "freeboard"}
-                onMouseEnter={() => setShow("freeboard")}
+                eventKey="freeBoard"
+                active={show === "freeBoard"}
+                onMouseEnter={() => setShow("freeBoard")}
                 onMouseLeave={() => setShow(false)}
                 onClick={() => {
                   props.props.history.push(`/post/${show}`);
@@ -151,7 +151,7 @@ const ControlledTabs = (props) => {
               <Tab.Pane eventKey="hotboard" active={show === "hotboard"}>
                 <ListArticle data={article} />
               </Tab.Pane>
-              <Tab.Pane eventKey="freeboard" active={show === "freeboard"}>
+              <Tab.Pane eventKey="freeBoard" active={show === "freeBoard"}>
                 <ListArticle data={article} />
               </Tab.Pane>
               <Tab.Pane eventKey="infoboard" active={show === "infoboard"}>
@@ -267,8 +267,8 @@ const ControlledUserInfo = (props) => {
     <UserInfoWrapper>
       <UserAvatarSection></UserAvatarSection>
       <UserInfoSection>
-        <UserNickName>{udata() ? udata().username : "Null"}</UserNickName>
-        <UserUserName>{udata() ? udata().nickname : "Null"}</UserUserName>
+        <UserNickName>{udata() ? udata().name : "Null"}</UserNickName>
+        <UserUserName>{udata() ? udata().nickName : "Null"}</UserUserName>
         <ButtonForm>
           <MyPageLink to="/user">내 정보</MyPageLink>
           <LogoutButton
@@ -282,10 +282,12 @@ const ControlledUserInfo = (props) => {
             로그아웃
           </LogoutButton>
         </ButtonForm>
-        <UserSchoolText>{udata() ? udata().schoolname : "Null"}</UserSchoolText>
+        <UserSchoolText>
+          {udata() ? udata().highSchoolName : "Null"}
+        </UserSchoolText>
         <UserClass>
           <span>{udata() ? udata().grade : "Null"}학년 </span>
-          <span>{udata() ? udata().classnum : "Null"}반</span>
+          <span>{udata() ? udata().classNum : "Null"}반</span>
         </UserClass>
       </UserInfoSection>
     </UserInfoWrapper>
@@ -323,9 +325,9 @@ function Main(props) {
           <ControlledUserInfo userData={udata()} prop={props} />
         </ControllSection>
         <UserSchedule
-          nickname={udata() ? udata().nickname : "당신"}
+          nickname={udata() ? udata().nickName : "당신"}
         ></UserSchedule>
-        <UserDinner nickname={udata() ? udata().nickname : "당신"}></UserDinner>
+        <UserDinner nickname={udata() ? udata().nickName : "당신"}></UserDinner>
       </MainInner>
     </Wrapper>
   );

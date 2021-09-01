@@ -7,10 +7,11 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ResponseBoardCommentInfo {
+    private Long commentId;
     private String content;
     private Long writer;
 
     public static ResponseBoardCommentInfo of(Comment comment) {
-        return new ResponseBoardCommentInfo(comment.getContent(), comment.getMember().getId());
+        return new ResponseBoardCommentInfo(comment.getId(), comment.getContent(), comment.getMember().getId());
     }
 }

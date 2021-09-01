@@ -36,7 +36,7 @@ public class Board extends DateLog {
     @JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "board_friend_fk"))
     private Member member;
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
     @Builder(builderMethodName = "createBoardEntity")
@@ -58,5 +58,9 @@ public class Board extends DateLog {
     public void addBoardToBoardGroup(BoardGroup boardGroup) {
         this.boardGroup = boardGroup;
         boardGroup.getBoards().add(this);
+    }
+
+    public void plusLikeCount() {
+        this.likeCount += 1;
     }
 }

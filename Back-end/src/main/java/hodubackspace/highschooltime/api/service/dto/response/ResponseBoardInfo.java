@@ -7,32 +7,32 @@ import lombok.Setter;
 import org.thymeleaf.util.ObjectUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class ResponseBoardInfo {
     private Long id;
+    private Long writerId;
     private String title;
     private String content;
-    private List<ResponseBoardCommentInfo> comments;
+    private List<ResponseBoardCommentInfo> comments = new ArrayList<>();
 
     public static ResponseBoardInfo of(Board board) {
         ResponseBoardInfo responseBoardInfo = new ResponseBoardInfo();
         responseBoardInfo.setId(board.getId());
+        responseBoardInfo.setWriterId(board.getMember().getId());
         responseBoardInfo.setTitle(board.getTitle());
         responseBoardInfo.setContent(board.getContent());
 
 
-        board.getComments().stream()
+        List<ResponseBoardCommentInfo> result = board.getComments().stream()
                 .map(ResponseBoardCommentInfo::of)
-                .map((ResponseBoardCommentInfo) -> responseBoardInfo.getComments().add(ResponseBoardCommentInfo));
+                .collect(Collectors.toList());
 
-        if (responseBoardInfo.getComments() == null) {
-            responseBoardInfo.setComments(Collections.emptyList());
-        }
+        result.forEach(comment -> responseBoardInfo.getComments().add(comment));
 
         return responseBoardInfo;
     }

@@ -1,6 +1,6 @@
 package hodubackspace.highschooltime.api.repository.member;
 
-import hodubackspace.highschooltime.api.advice.exception.LoginEmailNotFoundMemberException;
+import hodubackspace.highschooltime.api.advice.exception.auth.LoginEmailNotFoundMemberException;
 import hodubackspace.highschooltime.api.repository.CommonFunctionRepository;
 import hodubackspace.highschooltime.domain.Member;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +28,12 @@ public class MemberRepository implements CommonFunctionRepository<Member,Long> {
     @Override
     public Optional<Member> findOne(Long id) {
         return Optional.ofNullable(em.find(Member.class, id));
+    }
+
+    public List<Member> findMultiple(Long... id) {
+        return em.createQuery("select m from Member m where m.id in :ids", Member.class)
+                .setParameter("ids", List.of(id))
+                .getResultList();
     }
 
     public Optional<Member> findOneByEmail(String email) {

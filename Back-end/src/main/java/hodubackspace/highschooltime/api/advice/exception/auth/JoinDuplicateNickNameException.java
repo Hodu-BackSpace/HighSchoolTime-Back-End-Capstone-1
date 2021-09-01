@@ -1,6 +1,6 @@
-package hodubackspace.highschooltime.api.advice.exception;
+package hodubackspace.highschooltime.api.advice.exception.auth;
 
-public class JoinDuplicateNickNameException extends RuntimeException {
+public class JoinDuplicateNickNameException extends DuplicateException {
     public JoinDuplicateNickNameException() {
         super();
     }

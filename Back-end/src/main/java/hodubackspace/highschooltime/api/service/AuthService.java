@@ -1,8 +1,8 @@
 package hodubackspace.highschooltime.api.service;
 
-import hodubackspace.highschooltime.api.advice.exception.JoinDuplicateEmailException;
-import hodubackspace.highschooltime.api.advice.exception.JoinDuplicateNickNameException;
-import hodubackspace.highschooltime.api.advice.exception.LoginEmailNotFoundMemberException;
+import hodubackspace.highschooltime.api.advice.exception.auth.JoinDuplicateEmailException;
+import hodubackspace.highschooltime.api.advice.exception.auth.JoinDuplicateNickNameException;
+import hodubackspace.highschooltime.api.advice.exception.auth.LoginEmailNotFoundMemberException;
 import hodubackspace.highschooltime.api.common.security.auth.ResponseTokenDto;
 import hodubackspace.highschooltime.api.common.security.auth.TokenProvider;
 import hodubackspace.highschooltime.api.controller.dto.request.RequestJoinMemberDto;

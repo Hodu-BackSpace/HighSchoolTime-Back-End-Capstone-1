@@ -1,22 +1,20 @@
 package hodubackspace.highschooltime.api.advice;
 
 import hodubackspace.highschooltime.api.advice.dto.ExceptionDto;
-import hodubackspace.highschooltime.api.advice.exception.JoinDuplicateEmailException;
-import hodubackspace.highschooltime.api.advice.exception.JoinDuplicateNickNameException;
-import hodubackspace.highschooltime.api.advice.exception.LoginEmailNotFoundMemberException;
-import hodubackspace.highschooltime.api.advice.exception.LoginPasswordNotMatchException;
+import hodubackspace.highschooltime.api.advice.exception.auth.JoinDuplicateEmailException;
+import hodubackspace.highschooltime.api.advice.exception.auth.JoinDuplicateNickNameException;
+import hodubackspace.highschooltime.api.advice.exception.auth.LoginEmailNotFoundMemberException;
+import hodubackspace.highschooltime.api.advice.exception.auth.LoginPasswordNotMatchException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver;
 
 @RestControllerAdvice
 @Slf4j
-public class MemberRestControllerAdvice {
+public class AuthRestControllerAdvice {
 
     @ExceptionHandler(value = LoginEmailNotFoundMemberException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -1,5 +1,6 @@
 package hodubackspace.highschooltime.api.common.security.auth;
 
+import hodubackspace.highschooltime.api.advice.exception.access.NotAccessToOwnBoardException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

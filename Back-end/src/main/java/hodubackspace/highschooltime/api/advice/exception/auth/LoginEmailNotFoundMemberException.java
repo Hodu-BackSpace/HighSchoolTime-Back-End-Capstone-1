@@ -1,4 +1,4 @@
-package hodubackspace.highschooltime.api.advice.exception;
+package hodubackspace.highschooltime.api.advice.exception.auth;
 
 public class LoginEmailNotFoundMemberException extends RuntimeException {
     public LoginEmailNotFoundMemberException() {

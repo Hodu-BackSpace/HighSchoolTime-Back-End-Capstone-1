@@ -1,6 +1,6 @@
-package hodubackspace.highschooltime.api.advice.exception;
+package hodubackspace.highschooltime.api.advice.exception.auth;
 
-public class JoinDuplicateEmailException extends RuntimeException {
+public class JoinDuplicateEmailException extends DuplicateException {
     public JoinDuplicateEmailException() {
         super();
     }

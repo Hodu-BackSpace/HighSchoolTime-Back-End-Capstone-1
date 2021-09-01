@@ -1,0 +1,19 @@
+package hodubackspace.highschooltime.api.service.dto.response;
+
+import hodubackspace.highschooltime.domain.Friend;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class ResponseAddFriendInfoDto {
+    private Long friendMemberId;
+    private String friendMemberName;
+
+    public static ResponseFriendInfoDto of(Friend friend) {
+        return new ResponseFriendInfoDto(friend.getMember().getId(), friend.getMember().getName());
+    }
+
+}

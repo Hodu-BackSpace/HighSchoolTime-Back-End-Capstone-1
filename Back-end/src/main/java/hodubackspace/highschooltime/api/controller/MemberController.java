@@ -1,6 +1,7 @@
 package hodubackspace.highschooltime.api.controller;
 
 import hodubackspace.highschooltime.api.common.annotation.TokenInfo;
+import hodubackspace.highschooltime.api.controller.dto.ResponseResultDto;
 import hodubackspace.highschooltime.api.controller.dto.request.RequestModifyMemberDto;
 import hodubackspace.highschooltime.api.service.dto.response.ResponseMemberInfo;
 import hodubackspace.highschooltime.api.service.MemberService;
@@ -17,28 +18,21 @@ import javax.validation.Valid;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/members")
 public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/members")
-    public Result<ResponseMemberInfo> infoMember(@TokenInfo Long loggedMemberId) {
-        return new Result<ResponseMemberInfo>(1,memberService.memberInfo(loggedMemberId));
+    @GetMapping
+    public ResponseResultDto<ResponseMemberInfo> infoMember(@TokenInfo Long loggedMemberId) {
+        return new ResponseResultDto<ResponseMemberInfo>(1,memberService.memberInfo(loggedMemberId));
     }
 
-    @PatchMapping("/members")
-    public ResponseEntity<Result<String>> modifyMember(@TokenInfo Long loggedMemberId, @RequestBody @Valid RequestModifyMemberDto request) {
+    @PatchMapping
+    public ResponseEntity<ResponseResultDto<String>> modifyMember(@TokenInfo Long loggedMemberId, @RequestBody @Valid RequestModifyMemberDto request) {
         memberService.updateMemberInfo(loggedMemberId,request);
-        return ResponseEntity.status(HttpStatus.OK).body(new Result<>(1,"success"));
+        return ResponseEntity.status(HttpStatus.OK).body(new ResponseResultDto<>(1,"success"));
 
-    }
-
-    @Getter
-    @AllArgsConstructor
-    static class Result<T> {
-        int count;
-        T data;
     }
 
 }

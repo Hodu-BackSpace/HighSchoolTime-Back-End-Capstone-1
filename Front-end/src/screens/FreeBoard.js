@@ -106,7 +106,7 @@ class FreeBoard extends React.Component {
         .then(({ data }) => {
           console.log(data);
           this.setState({
-            boards: data,
+            boards: data.data,
           });
           console.log(this.state.boards);
         })
@@ -128,7 +128,7 @@ class FreeBoard extends React.Component {
       .then(({ data }) => {
         console.log(data);
         this.setState({
-          boards: data,
+          boards: data.data,
         });
         console.log(this.state.boards);
       })

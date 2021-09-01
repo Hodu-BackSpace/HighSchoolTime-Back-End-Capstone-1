@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -36,10 +37,29 @@ public class Friend extends DateLog{
         this.friendMemberId = friendMemberId;
         this.friendMemberName = friendMemberName;
         this.friendStatus = friendStatus;
-        this.member = member;
+        addFriendList(member);
     }
 
     public void updateStatus(FriendStatus friendStatus) {
         this.friendStatus = friendStatus;
+    }
+
+    public void addFriendList(Member member) {
+        this.member = member;
+        member.getFriends().add(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Friend friend = (Friend) o;
+        return Objects.equals(getId(), friend.getId()) && Objects.equals(getFriendMemberId(), friend.getFriendMemberId()) && Objects.equals(getFriendMemberName(), friend.getFriendMemberName()) && getFriendStatus() == friend.getFriendStatus();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getId(), getFriendMemberId(), getFriendMemberName(), getFriendStatus());
     }
 }

@@ -1,4 +1,4 @@
-package hodubackspace.highschooltime.api.advice.exception;
+package hodubackspace.highschooltime.api.advice.exception.auth;
 
 public class LoginPasswordNotMatchException extends RuntimeException {
     public LoginPasswordNotMatchException() {

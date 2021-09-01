@@ -20,11 +20,11 @@ class Friend extends React.Component {
     axios.defaults.headers.common["Authorization"] = token;
 
     axios
-      .get(SERVER_URL + "/api/v1/friend/followers")
+      .get(SERVER_URL + "/api/v1/friends/apply")
       .then(({ data }) => {
-        console.log(data);
+        console.log(data.data);
         this.setState({
-          boards: data,
+          boards: data.data,
         });
       })
       .catch((e) => {
@@ -36,11 +36,11 @@ class Friend extends React.Component {
     axios.defaults.headers.common["Authorization"] = token;
 
     axios
-      .get(SERVER_URL + "/api/v1/friend")
+      .get(SERVER_URL + "/api/v1/friends")
       .then(({ data }) => {
-        console.log(data);
+        console.log(data.data);
         this.setState({
-          friends: data,
+          friends: data.data,
         });
       })
       .catch((e) => {
@@ -52,10 +52,10 @@ class Friend extends React.Component {
     axios.defaults.headers.common["Authorization"] = token;
 
     axios
-      .post(SERVER_URL + `/api/v1/friend/${id}/apply`)
+      .post(SERVER_URL + `/api/v1/friends/${id}/apply`)
       .then(({ data }) => {
         alert("수락완료");
-        console.log(data);
+        console.log(data.data);
       })
       .catch((e) => {
         console.error(e);
@@ -66,10 +66,10 @@ class Friend extends React.Component {
     axios.defaults.headers.common["Authorization"] = token;
 
     axios
-      .delete(SERVER_URL + `/api/v1/friend/${id}`)
+      .delete(SERVER_URL + `/api/v1/friends/${id}`)
       .then(({ data }) => {
-        console.log(data);
-        alert("거절완료");
+        console.log(data.data);
+        alert("삭제 완료");
       })
       .catch((e) => {
         console.error(e);
@@ -87,14 +87,14 @@ class Friend extends React.Component {
         <tbody>
           <tr className="friendlist">
             {this.state.friends.map((friend) => (
-              <tr key={friend.friendId} id="content_content">
-                <td>{friend.friendName}</td>
+              <tr key={friend.friendMemberId} id="content_content">
+                <td>{friend.friendMemberName}</td>
                 <Link to={`/post/freeboard/letter/${friend.memberId}`}>
                   <button on>쪽지보내기</button>
                 </Link>
                 <button
                   onClick={() => {
-                    this.Refusefriend({ id: friend.friendId });
+                    this.Refusefriend({ id: friend.friendMemberId });
                   }}
                 >
                   친구삭제
@@ -107,18 +107,18 @@ class Friend extends React.Component {
           </div>
           <tr className="friendplz">
             {this.state.boards.map((board) => (
-              <tr key={board.friendId} id="content_content">
-                <span>{board.friendName}</span>
+              <tr key={board.friendMemberId} id="content_content">
+                <span>{board.friendMemberName}</span>
                 <button
                   onClick={() => {
-                    this.Acceptfriend({ id: board.friendId });
+                    this.Acceptfriend({ id: board.friendMemberId });
                   }}
                 >
                   수락
                 </button>
                 <button
                   onClick={() => {
-                    this.Refusefriend({ id: board.friendId });
+                    this.Refusefriend({ id: board.friendMemberId });
                   }}
                 >
                   거절

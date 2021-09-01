@@ -1,4 +1,4 @@
-package hodubackspace.highschooltime.api.advice.exception;
+package hodubackspace.highschooltime.api.advice.exception.found;
 
 public class NotFoundBoardException extends RuntimeException {
     public NotFoundBoardException() {

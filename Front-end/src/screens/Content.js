@@ -151,8 +151,7 @@ class Content extends React.Component {
           params.boardlist +
           "/" +
           params.num +
-          "/comment" +
-          "/add",
+          "/comment",
         {
           content: this.state.writeco,
         }
@@ -174,15 +173,13 @@ class Content extends React.Component {
     axios.defaults.headers.common["Authorization"] = token;
 
     axios
-      .get(SERVER_URL + `/post/freeboard/${id}/like`)
+      .post(SERVER_URL + `/api/v1/board/freeBoard/${id}/like`)
       .then((res) => {
-        if (res.data === "failed") {
-        } else {
-          <Redirect to="this.props.location.pathname" />;
-        }
+        this.setIsLiked();
+        <Redirect to="this.props.location.pathname" />;
       })
       .catch((err) => {
-        console.log(err);
+        alert("Error like!");
         console.log(err);
       });
   };
@@ -191,15 +188,12 @@ class Content extends React.Component {
     let token = localStorage.getItem("TOKEN");
     axios.defaults.headers.common["Authorization"] = token;
     axios
-      .post(SERVER_URL + `/api/v1/friend/${id}`)
+      .post(SERVER_URL + `/api/v1/friends/${id}`)
       .then((res) => {
-        if (res.data === "failed") {
-          alert("요청실패");
-        } else {
-          alert("요청완료");
-        }
+        alert("요청완료");
       })
       .catch((err) => {
+        alert("요청실패");
         console.log(err);
       });
   };
@@ -227,9 +221,17 @@ class Content extends React.Component {
   DeleteBoard = async ({ id }) => {
     let token = localStorage.getItem("TOKEN");
     axios.defaults.headers.common["Authorization"] = token;
+    const { params } = this.props.match;
 
     axios
-      .delete(SERVER_URL + `/post/${id}`)
+      .delete(
+        SERVER_URL +
+          "/api/v1/board/" +
+          params.boardlist +
+          "/" +
+          params.num +
+          `/comment/${id}`
+      )
       .then((res) => {
         if (res.data === "failed") {
           alert("작성자만 삭제할 수 있습니다.");
@@ -252,11 +254,11 @@ class Content extends React.Component {
   setIsLiked() {
     this.setState({ isLiked: !this.state.isLiked });
   }
+  comment_id(id) {
+    if (id === this.state.boards.writerId) return "글쓴이";
+    else return "익명" + id;
+  }
   render() {
-    function comment_id(id) {
-      if (id === -1) return "글쓴이";
-      else return "익명" + id;
-    }
     return (
       <Wrapper>
         <ContentInner>
@@ -282,7 +284,6 @@ class Content extends React.Component {
               <ContentLikeForm>
                 <button
                   onClick={() => {
-                    this.setIsLiked();
                     this.Sendlike({ id: this.state.boards.id });
                   }}
                   style={{
@@ -312,14 +313,14 @@ class Content extends React.Component {
                     </Modal.Header>
 
                     <Modal.Footer>
-                      <Link to={`/post/freeboard/letter/${board.member_id}`}>
+                      <Link to={`/post/freeboard/letter/${board.writer}`}>
                         <button variant="secondary" onClick={this.closeModal}>
                           쪽지보내기
                         </button>
                       </Link>
                       <button
                         onClick={() => {
-                          this.Friendplz({ id: board.member_id });
+                          this.Friendplz({ id: board.writer });
                         }}
                       >
                         친구 요청
@@ -336,11 +337,11 @@ class Content extends React.Component {
                         color: "black",
                       }}
                     >
-                      {comment_id(board.userCount)}
+                      {this.comment_id(board.writer)}
                     </button>
                     <button
                       onClick={() => {
-                        this.DeleteBoard({ id: board.id });
+                        this.DeleteBoard({ id: board.commentId });
                       }}
                       style={{
                         backgroundColor: "white",

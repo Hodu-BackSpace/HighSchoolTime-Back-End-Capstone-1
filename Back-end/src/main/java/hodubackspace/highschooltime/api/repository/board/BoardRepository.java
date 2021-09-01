@@ -17,10 +17,12 @@ import java.util.Optional;
 public class BoardRepository implements CommonFunctionRepository<Board, Long> {
 
     private final EntityManager em;
+
     @Override
     public void save(Board entity) {
         em.persist(entity);
     }
+
     public Long saveReturnId(Board entity) {
         em.persist(entity);
         return entity.getId();
@@ -31,8 +33,14 @@ public class BoardRepository implements CommonFunctionRepository<Board, Long> {
         return Optional.ofNullable(em.find(Board.class, id));
     }
 
-    public Optional<Board> findOneWithComments(BoardGroup boardGroup, Long id) {
-        return Optional.ofNullable(em.createQuery("select distinct b from Board b left join fetch b.comments join b.boardGroup bg " +
+    public Optional<Board> findOneWithMember(Long id) {
+        return Optional.ofNullable(em.createQuery("select b from Board b join fetch b.member m where b.id=:id", Board.class)
+                .setParameter("id", id)
+                .getSingleResult());
+    }
+
+    public Optional<Board> findOneWithCommentsMember(BoardGroup boardGroup, Long id) {
+        return Optional.ofNullable(em.createQuery("select b from Board b join fetch b.member join b.boardGroup bg " +
                         "where b.id = :id and bg=:boardGroup", Board.class)
                 .setParameter("id", id)
                 .setParameter("boardGroup", boardGroup)
@@ -42,6 +50,15 @@ public class BoardRepository implements CommonFunctionRepository<Board, Long> {
     @Override
     public List<Board> findAll() {
         return null;
+    }
+
+    public List<Board> findAllTest(String boardName, String whereWrite, int page) {
+        return em.createQuery("select b from Board b join b.boardGroup bg on bg.boardName=:boardName where b.whereWrite=:whereWrite")
+                .setParameter("boardName",boardName)
+                .setParameter("whereWrite",whereWrite)
+                .setFirstResult((page-1) * 10)
+                .setMaxResults(10)
+                .getResultList();
     }
 
 }

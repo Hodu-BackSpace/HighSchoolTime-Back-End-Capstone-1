@@ -37,7 +37,7 @@ const ListMessage = (props) => {
             </tr>
           </thead>
           <tbody>
-            {message.data.map((m) => {
+            {message.data.data.map((m) => {
               return (
                 <tr key={m.id}>
                   <td style={{ textAlign: "center" }}>{m.fromUserName}</td>
@@ -67,7 +67,7 @@ const ListMessage = (props) => {
           </thead>
           <tbody>
             {sendmessage ? (
-              sendmessage.data.map((m) => {
+              sendmessage.data.data.map((m) => {
                 return (
                   <tr key={m.id}>
                     <td style={{ textAlign: "center" }}>{m.toUserName}</td>
@@ -95,11 +95,11 @@ const MessageDetail = (props) => {
   return (
     <Table bordered hover>
       <thead>
-        {message.data.map((m) => {
-          if (m.id === messageId) {
-            settempid(m.fromUserId);
+        {message.data.data.map((m) => {
+          if (m.messageId === messageId) {
+            settempid(m.fromMemberId);
             return (
-              <tr key={m.id}>
+              <tr key={m.messageId}>
                 <th style={{ textAlign: "center" }}>보낸 사람</th>
                 <th style={{ width: "85%", textAlign: "center" }}>내용</th>
               </tr>
@@ -108,11 +108,11 @@ const MessageDetail = (props) => {
         })}
       </thead>
       <tbody>
-        {message.data.map((m) => {
-          if (m.id === messageId) {
+        {message.data.data.map((m) => {
+          if (m.messageId === messageId) {
             return (
               <tr key={m.id}>
-                <td style={{ textAlign: "center" }}>{m.fromUserName}</td>
+                <td style={{ textAlign: "center" }}>{m.fromMemberName}</td>
                 <td style={{ width: "85%", textAlign: "center" }}>
                   {m.content}
                 </td>
@@ -224,9 +224,9 @@ function Message(props) {
                 </tr>
               </thead>
               <tbody>
-                {sendmessage.data.map((m) => {
+                {sendmessage.data.data.map((m) => {
                   return (
-                    <tr key={m.id}>
+                    <tr key={m.messageId}>
                       <td style={{ textAlign: "center" }}>{m.toUserName}</td>
 
                       <td style={{ textAlign: "center" }}>{m.content}</td>

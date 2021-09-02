@@ -18,24 +18,22 @@ export const GetMessage = async (props) => {
   const { setmessage, setnullm, pageNum, setabc } = props;
   console.log(pageNum);
   await axios
-    .get(SERVER_URL + "/message/received?page=" + pageNum, {
+    .get(SERVER_URL + "/api/v1/messages/received?page=" + pageNum, {
       headers: {
         Authorization: tokenData(),
       },
     })
     .then((res) => {
-      if (res.data.length === 0) {
-        console.log("No Message");
-        setnullm(true);
-        setabc(false);
-      } else {
-        console.log("Yes Message");
-        setmessage(res);
-        setabc(false);
-      }
+      console.log("Yes Message");
+      setmessage(res);
+      setabc(false);
     })
     .catch((err) => {
+      console.log("No Message");
       console.log(err);
+
+      setnullm(true);
+      setabc(false);
     });
 };
 
@@ -43,39 +41,33 @@ export const GetSendMessage = async (props) => {
   const { setsendmessage, setsnullm } = props;
 
   await axios
-    .get(SERVER_URL + "/message/sent", {
+    .get(SERVER_URL + "/api/v1/messages/sent", {
       headers: {
         Authorization: tokenData(),
       },
     })
     .then((res) => {
-      if (res.data.length === 0) {
-        console.log("No Message");
-        setsnullm(true);
-      } else {
-        console.log("Yes sendMessage");
-        setsendmessage(res);
-      }
+      console.log("Yes sendMessage");
+      setsendmessage(res);
     })
     .catch((err) => {
       console.log(err);
+      console.log("No Message");
+      setsnullm(true);
     });
 };
 
 export const PostSendMessage = async (props) => {
   const { content, tempid, settypemodal } = props;
   await axios
-    .post(SERVER_URL + "/message/" + `${tempid}`, {
+    .post(SERVER_URL + "/api/v1/messages", {
+      toMemberId: tempid,
       content: content,
     })
     .then((res) => {
-      if (res.data === "failed") {
-      } else {
-        //dfdf
-        settypemodal("1");
-        window.alert("쪽지 전송이 완료되었습니다.");
-        console.log("success!!!!!");
-      }
+      settypemodal("1");
+      window.alert("쪽지 전송이 완료되었습니다.");
+      console.log("success!!!!!");
     })
     .catch((err) => {
       console.log(err);

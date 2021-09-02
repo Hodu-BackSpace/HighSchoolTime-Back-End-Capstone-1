@@ -1,6 +1,6 @@
 package hodubackspace.highschooltime.api.advice.exception.access;
 
-public class NotAccessToOwnBoardException extends RuntimeException {
+public class NotAccessToOwnBoardException extends NotAccessException {
     public NotAccessToOwnBoardException() {
         super();
     }

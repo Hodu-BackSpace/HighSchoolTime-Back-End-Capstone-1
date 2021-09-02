@@ -1,6 +1,6 @@
 package hodubackspace.highschooltime.api.advice.exception.found;
 
-public class NotFoundCommentException extends RuntimeException{
+public class NotFoundCommentException extends NotFoundException{
     public NotFoundCommentException() {
         super();
     }

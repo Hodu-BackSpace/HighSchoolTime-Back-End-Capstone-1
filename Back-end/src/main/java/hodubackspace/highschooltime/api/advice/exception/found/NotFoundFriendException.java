@@ -1,6 +1,6 @@
 package hodubackspace.highschooltime.api.advice.exception.found;
 
-public class NotFoundFriendException extends RuntimeException {
+public class NotFoundFriendException extends NotFoundException {
     public NotFoundFriendException() {
         super();
     }

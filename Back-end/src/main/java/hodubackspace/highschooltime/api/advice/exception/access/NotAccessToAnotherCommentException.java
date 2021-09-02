@@ -1,6 +1,6 @@
 package hodubackspace.highschooltime.api.advice.exception.access;
 
-public class NotAccessToAnotherCommentException extends RuntimeException {
+public class NotAccessToAnotherCommentException extends NotAccessException {
     public NotAccessToAnotherCommentException() {
         super();
     }

@@ -1,6 +1,6 @@
 package hodubackspace.highschooltime.api.advice.exception.access;
 
-public class NotAccessToOwnAddFriendException extends RuntimeException {
+public class NotAccessToOwnAddFriendException extends NotAccessException {
     public NotAccessToOwnAddFriendException() {
         super();
     }

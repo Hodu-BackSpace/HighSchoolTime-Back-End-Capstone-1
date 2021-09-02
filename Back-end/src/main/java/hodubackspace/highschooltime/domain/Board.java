@@ -9,6 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,8 @@ public class Board extends DateLog {
         this.whereWrite = member.getSchoolInfo().getHighSchoolName();
         this.likeCount = 0;
         addBoardToBoardGroup(boardGroup);
+        this.setCreatedDate(LocalDateTime.now());
+        this.setLastModifiedDate(LocalDateTime.now());
     }
 
     public void addComment(Comment comment) {

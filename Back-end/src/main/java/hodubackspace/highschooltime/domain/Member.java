@@ -37,7 +37,7 @@ public class Member extends DateLog {
     private Authority authority;
 
     @OneToMany(mappedBy = "fromMember", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Message> messages = new ArrayList<>();
+    private List<Message> sendMessages = new ArrayList<>();
 
     @OneToMany(mappedBy = "member")
     private List<Board> boards = new ArrayList<>();

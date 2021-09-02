@@ -1,6 +1,6 @@
 package hodubackspace.highschooltime.api.advice.exception.found;
 
-public class NotFoundMemberException extends RuntimeException {
+public class NotFoundMemberException extends NotFoundException {
     public NotFoundMemberException() {
         super();
     }

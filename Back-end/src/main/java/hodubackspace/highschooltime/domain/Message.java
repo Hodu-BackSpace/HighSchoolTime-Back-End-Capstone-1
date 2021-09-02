@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -22,7 +23,7 @@ public class Message extends DateLog {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "from_id",foreignKey = @ForeignKey(name = "message_from_member_fk"))
+    @JoinColumn(name = "from_member_id",foreignKey = @ForeignKey(name = "message_from_member_fk"))
     private Member fromMember;
 
     private Long toMemberId;
@@ -32,7 +33,15 @@ public class Message extends DateLog {
         Assert.hasText(content,"content is NULL");
 
         this.content = content;
-        this.fromMember = fromMember;
         this.toMemberId = toMemberId;
+        addSendMessage(fromMember);
+        this.setCreatedDate(LocalDateTime.now());
+        this.setLastModifiedDate(LocalDateTime.now());
     }
+
+    public void addSendMessage(Member member) {
+        this.fromMember = member;
+        member.getSendMessages().add(this);
+    }
+
 }

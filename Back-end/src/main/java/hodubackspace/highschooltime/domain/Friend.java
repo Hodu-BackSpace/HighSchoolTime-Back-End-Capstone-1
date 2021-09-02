@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -38,6 +39,8 @@ public class Friend extends DateLog{
         this.friendMemberName = friendMemberName;
         this.friendStatus = friendStatus;
         addFriendList(member);
+        this.setCreatedDate(LocalDateTime.now());
+        this.setLastModifiedDate(LocalDateTime.now());
     }
 
     public void updateStatus(FriendStatus friendStatus) {

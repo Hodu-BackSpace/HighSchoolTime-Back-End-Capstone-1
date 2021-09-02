@@ -13,7 +13,6 @@ class Friend extends React.Component {
       boards: [],
       friends: [],
     };
-    // <Link to = `dwqjqfqf${page}'
   }
   Loadplz = async () => {
     let token = localStorage.getItem("TOKEN");

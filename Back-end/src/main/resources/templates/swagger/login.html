@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" th:action="@{/api/swagger/login}" th:object="${loginDto}">
+    <input type="email" th:field="*{email}" placeholder="Type Email"/>
+    <input type="password" th:field="*{password}" placeholder="Type Pasword"/>
+    <button type="submit" value="제출">
+</form>
+</body>
+</html>

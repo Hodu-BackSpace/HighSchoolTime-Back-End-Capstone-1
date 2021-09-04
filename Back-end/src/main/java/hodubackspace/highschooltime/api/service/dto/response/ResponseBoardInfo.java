@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.thymeleaf.util.ObjectUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ResponseBoardInfo {
+public class ResponseBoardInfo implements Serializable {
     private Long id;
     private Long writerId;
     private String title;

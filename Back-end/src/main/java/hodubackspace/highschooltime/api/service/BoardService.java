@@ -16,6 +16,8 @@ import hodubackspace.highschooltime.domain.BoardGroup;
 import hodubackspace.highschooltime.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +68,7 @@ public class BoardService {
 //                .collect(Collectors.toList());
     }
 
+    @Cacheable(value = "board", key = "#boardId", cacheManager = "cacheManager")
     public ResponseBoardInfo viewBoardInfo(String boardName, Long boardId) {
         BoardGroup boardGroup = boardGroupRepository.findOneByBoardName(boardName)
                 .orElseThrow(() -> new NotFoundBoardGroupException());

@@ -2,6 +2,7 @@ package hodubackspace.highschooltime.api.repository.board.query.dto;
 
 import hodubackspace.highschooltime.api.service.dto.response.ResponseBoardCommentInfo;
 import hodubackspace.highschooltime.domain.Board;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 

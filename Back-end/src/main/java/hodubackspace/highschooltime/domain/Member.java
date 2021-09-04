@@ -8,6 +8,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Objects;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(exclude = {"messages","boards","friends"})
-public class Member extends DateLog {
+public class Member extends DateLog implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -4,9 +4,11 @@ import hodubackspace.highschooltime.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.io.Serializable;
+
 @Getter
 @AllArgsConstructor
-public class ResponseMemberInfo {
+public class ResponseMemberInfo implements Serializable {
     private String email;
     private String password;
     private String name;

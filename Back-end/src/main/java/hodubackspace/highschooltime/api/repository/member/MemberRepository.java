@@ -5,6 +5,7 @@ import hodubackspace.highschooltime.api.repository.CommonFunctionRepository;
 import hodubackspace.highschooltime.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
